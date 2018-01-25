@@ -3,17 +3,18 @@ import { graphql } from 'react-apollo';
 import gql from 'graphql-tag';
 
 class ProductList extends Component {
-  onAddClient(id, clientId) {
+    constructor(props) {
+        super(props);
+
+        this.state = { clientId: this.props.clientId };
+    }
+
+    onDeleteClient(id, clientId) {
     this.props.mutate({
-      variables: { id },
-      optimisticResponse: {
-        __typename: 'Mutation',
-        addClient: {
-          id,
-          __typename: 'ProductType',
-          clientId: clientId
+        variables: {
+            id,
+            clientId
         }
-      }
     });
   }
 
@@ -22,14 +23,10 @@ class ProductList extends Component {
       return (
         <li key={id} className="collection-item">
           {name}
-          <div className="vote-box">
-            <i
-              className="material-icons"
-              onClick={() => this.onAddClient(id, clientId)}
-            >
-              add
+          <div className="line-operation">
+            <i className="material-icons" onClick={() => this.onDeleteClient(id, this.state.clientId)}>
+              delete
             </i>
-            {clientId}
           </div>
         </li>
       );
@@ -46,10 +43,10 @@ class ProductList extends Component {
 }
 
 const mutation = gql`
-  mutation LikeLyric($id: ID) {
-    likeLyric(id: $id) {
+  mutation DeleteProductFromClient($id: ID!, $clientId: ID!) {
+    deleteProductFromClient(id: $id, clientId: $clientId) {
       id
-      likes
+      products
     }
   }
 `;

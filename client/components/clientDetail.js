@@ -6,22 +6,25 @@ import ProductCreate from './ProductCreate';
 import ProductList from './ProductList';
 
 class ClientDetail extends Component {
-  render() {
-    const { client } = this.props.data;
+    render() {
 
-    if (!client) { return <div>Loading...</div>; }
+        if (this.props.data.loading) {
+            return (<div>loading...</div>);
+        }
 
-    return (
-      <div>
-        <Link to="/">Back</Link>
-        <h3>{client.clientName}</h3>
-        <ProductList products={client.products} />
-        <ProductCreate clientId={this.props.params.id} />
-      </div>
-    );
-  }
+        const { client } = this.props.data;
+
+        return (
+            <div>
+                <Link to="/">Back</Link>
+                <h3>{client.clientName}</h3>
+                <ProductList products={client.products} clientId={client.id} />
+                <ProductCreate clientId={client.id} />
+            </div>
+        );
+    }
 }
 
 export default graphql(fetchClient, {
-  options: (props) => { return { variables: { id: props.params.id } } }
+    options: (props) => { return { variables: { id: props.match.params.id } } }
 })(ClientDetail);

@@ -45,6 +45,16 @@ const mutation = new GraphQLObjectType({
                 return Client.remove({ _id: id });
             }
         },
+        deleteProductFromClient: {
+            type: ClientType,
+            args: {
+                id: { type: GraphQLID },
+                clientId: { type: GraphQLID }
+            },
+            resolve(parentValue, { id, clientId }) {
+                return Client.deleteProduct(id, clientId);
+            }
+        },
         deleteProduct: {
             type: ProductType,
             args: { id: { type: GraphQLID } },

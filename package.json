@@ -9,6 +9,7 @@
   },
   "scripts": {
     "dev": "nodemon index.js --ignore client",
+    "debug": "nodemon index.js --ignore client",
     "build": "webpack"
   },
   "author": "",

@@ -18,10 +18,24 @@ ClientSchema.statics.addProduct = function (id, name) {
 
     return this.findById(id)
         .then(client => {
-            const product = new Product({ name})
+            const product = new Product({ name })
             client.products.push(product)
             return Promise.all([product.save(), client.save()])
-                .then(([product, client]) => song);
+                .then(([product, client]) => client);
+        });
+}
+
+ClientSchema.statics.deleteProduct = function (id, clientId) {
+    const Client = mongoose.model('client');
+
+    return Client.findById(clientId)
+        .populate('products')
+        .then(client => {
+            const index = client.products.findIndex(element => element.id === id);
+            if (index > -1) {
+                client.products.splice(index, 1);
+                return client.save().then(client => client);
+            }
         });
 }
 

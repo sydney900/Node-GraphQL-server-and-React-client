@@ -50,7 +50,7 @@ class ClientCreate extends Component {
                         onChange={event => this.setState({ email: event.target.value })}
                         value={this.state.email}
                     />
-                    <input type="submit" value="Submit" />
+                    <input type="submit" value="Save" />
                 </form>
             </div>
         );

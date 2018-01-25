@@ -6,7 +6,7 @@ class ProductCreate extends Component {
     constructor(props) {
         super(props);
 
-        this.state = { name: '' };
+        this.state = { name: '', clientId: this.props.clientId };
     }
 
     onSubmit(event) {
@@ -14,8 +14,8 @@ class ProductCreate extends Component {
 
         this.props.mutate({
             variables: {
-                name: this.state.content,
-                clientId: this.props.clientId
+                name: this.state.name,
+                clientId: this.state.clientId
             }
         }).then(() => this.setState({ name: '' }));
     }
@@ -28,6 +28,7 @@ class ProductCreate extends Component {
                     value={this.state.name}
                     onChange={event => this.setState({ name: event.target.value })}
                 />
+                <input type="submit" value="Save" />
             </form>
         );
     }
