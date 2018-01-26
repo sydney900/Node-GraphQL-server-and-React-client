@@ -19,7 +19,7 @@ class ClientList extends Component {
             return this.props.data.clients.map(({ id, clientName }) => {
                 return (
                     <li key={id} className="collection-item">
-                        <Link  to={`/client/${id}`}>{clientName}</Link>                        
+                        <Link  to={`/client/${id}`}>{clientName}</Link> 
                         <i className="material-icons"
                             onClick={() => this.onClientDelete(id)}>
                             delete
@@ -40,7 +40,7 @@ class ClientList extends Component {
                 <ul className="collection">
                     {this.renderClients()}
                 </ul>
-                <Link to="/client/new" className="btn-floating btn-medium blue right">
+                <Link to="/client/new" className="btn-floating btn-medium right">
                     <i className="material-icons">add</i>
                 </Link>
             </div>

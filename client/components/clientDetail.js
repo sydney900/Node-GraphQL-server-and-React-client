@@ -15,11 +15,21 @@ class ClientDetail extends Component {
         const { client } = this.props.data;
 
         return (
-            <div>
-                <Link to="/">Back</Link>
-                <h3>{client.clientName}</h3>
-                <ProductList products={client.products} clientId={client.id} />
-                <ProductCreate clientId={client.id} />
+            <div className="mdl-card">
+                <div className="mdl-card__actions">
+                    <Link to="/">Back</Link>
+                </div>
+                <div className="mdl-card__title dl-card--border">
+                   <h3>{client.clientName}</h3>
+                </div>
+                <div className="mdl-card__media dl-card--border">
+                    <h6 color="grey">Product List:</h6>
+                    <ProductList products={client.products} clientId={client.id} />
+                </div>
+                <div className="mdl-card__supporting-text dl-card--border">
+                    <h6 color="grey">New Product:</h6>
+                    <ProductCreate clientId={client.id} />                
+                </div>                
             </div>
         );
     }
