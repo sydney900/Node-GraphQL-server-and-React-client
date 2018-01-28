@@ -9,7 +9,7 @@ class ProductList extends Component {
         this.state = { clientId: this.props.clientId };
     }
 
-    onDeleteClient(id, clientId) {
+    onDeleteFromClient(id, clientId) {
     this.props.mutate({
         variables: {
             id,
@@ -24,7 +24,7 @@ class ProductList extends Component {
         <li key={id} className="collection-item">
           {name}
           <div className="line-operation">
-            <i className="material-icons" onClick={() => this.onDeleteClient(id, this.state.clientId)}>
+            <i className="material-icons" onClick={() => this.onDeleteFromClient(id, this.state.clientId)}>
               delete
             </i>
           </div>
