@@ -29,7 +29,7 @@ npm run debug
 [http://localhost:63001](http://localhost:63001/)
 ### Broswer GraphiQL
 [http://localhost:63001/graphql](http://localhost:63001/graphql)
-![alt text](https://github.com/sydney900/Node-GraphQL-server-and-React-client/graphql "GraphiQL")
+![alt text](https://github.com/sydney900/Node-GraphQL-server-and-React-client/blob/master/graphql.png "GraphiQL")
 
 
 
