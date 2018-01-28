@@ -1,5 +1,5 @@
 # Node GraphQL server and React client
-Node GraphQL server and React client
+Node GraphQL server using MongoDB for persistent storage and React client
 
 ### Setup
 1. #### run following command
