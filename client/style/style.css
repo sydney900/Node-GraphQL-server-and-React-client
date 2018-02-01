@@ -1,3 +1,30 @@
+body, .wrapper {
+  height: 100%;
+  width: 100%;
+}
+
+.wrapper {
+  display: flex;  
+  flex-flow: row wrap;
+  font-weight: bold;
+  text-align: center;
+}
+
+.wrapper > * {
+  padding: 10px;
+  flex: 1 100%;
+}
+
+@media all and (min-width: 600px) {
+  .aside { flex: 1 auto; }
+}
+
+@media all and (min-width: 800px) {
+  .header  { flex: 0; }
+  .main    { flex: 1; }
+  .footer  { order: 2; }
+}
+
 .collection-item {
   display: flex;
   justify-content: space-between;
