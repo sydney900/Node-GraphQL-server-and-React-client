@@ -4,6 +4,8 @@ import ApolloClient from 'apollo-client';
 import { ApolloProvider } from 'react-apollo';
 import { HttpLink } from 'apollo-link-http';
 import { InMemoryCache } from 'apollo-cache-inmemory';
+import fetch from 'unfetch';
+
 
 import ClientList from './ClientList';
 import ClientCreate from './ClientCreate';
@@ -11,7 +13,7 @@ import ClientDetail from './ClientDetail';
 
 const client = new ApolloClient({
     dataIdFromObject: o => o.id,
-    link: new HttpLink(),
+    link: new HttpLink({ uri: '/graphql', fetch: fetch }),
     cache: new InMemoryCache()
 });
 
@@ -21,15 +23,16 @@ class App extends Component {
     
     return (
       <BrowserRouter>           
-        <div className="mdl-layout mdl-js-layout mdl-layout--fixed-header">
-            <nav className="mdl-navigation mdl-layout__header-row">
-                <span className="mdl-navigation__link">
-                    <Link to="/" >Home</Link>
-                </span>
-                <span className="mdl-navigation__link">
-                    <Link to="/client/new">Create new client</Link>
-                </span> 
-            </nav>
+        <div>
+            <nav>
+                <div className="nav-wrapper">
+                <a href="#" className="brand-logo right">Demo</a>
+                <ul id="nav-mobile" className="left">
+                <li><Link to="/" >Home</Link></li>
+                <li><Link to="/client/new">Create new client</Link></li>
+                </ul>
+                </div>
+            </nav>            
             <ApolloProvider client={client}>
                 <Switch>
                     <Route exact path="/" component={ClientList} />

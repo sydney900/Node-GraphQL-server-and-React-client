@@ -10,6 +10,7 @@
   "scripts": {
     "dev": "nodemon index.js --ignore client",
     "debug": "nodemon index.js --ignore client",
+    "test": "jest --watch",
     "build": "webpack"
   },
   "author": "",
@@ -20,8 +21,6 @@
     "axios": "^0.17.1",
     "babel-core": "^6.26.0",
     "babel-loader": "^7.1.2",
-    "babel-preset-env": "^1.6.1",
-    "babel-preset-react": "^6.24.1",
     "body-parser": "^1.18.2",
     "connect-mongo": "^2.0.0",
     "css-loader": "^0.28.7",
@@ -42,5 +41,23 @@
     "style-loader": "^0.19.1",
     "webpack": "^3.10.0",
     "webpack-dev-middleware": "^2.0.2"
+  },
+  "devDependencies": {
+    "babel-jest": "^22.1.0",
+    "babel-preset-env": "^1.6.1",
+    "babel-preset-latest": "^6.24.1",
+    "babel-preset-react": "^6.24.1",
+    "enzyme": "^3.3.0",
+    "enzyme-adapter-react-16": "^1.1.1",
+    "jest": "^22.1.4",
+    "jest-css-modules": "^1.1.0",
+    "react-test-renderer": "^16.2.0",
+    "unfetch": "^3.0.0"
+  },
+  "jest": {
+    "setupTestFrameworkScriptFile": "./setupTests.js",
+    "transform": {
+      ".*": "<rootDir>/node_modules/jest-css-modules"
+    }
   }
 }

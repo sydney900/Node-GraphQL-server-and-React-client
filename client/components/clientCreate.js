@@ -34,23 +34,23 @@ class ClientCreate extends Component {
             <div>
                 <Link to="/" className="">Back</Link>
                 <h3>Create a New Client</h3>
-                <form onSubmit={this.onSubmit.bind(this)}>
-                    <label>Client Name:</label>
-                    <input
+                <form onSubmit={this.onSubmit.bind(this)} >
+                    <label>Client Name</label>
+                    <input minLength="5"
                         onChange={event => this.setState({ clientName: event.target.value })}
                         value={this.state.clientName}
                     />
                     <label>Client Password:</label>
-                    <input
+                    <input type="password"
                         onChange={event => this.setState({ clientPassword: event.target.value })}
                         value={this.state.clientPassword}
                     />
                     <label>Client Email:</label>
-                    <input
+                    <input type="email"
                         onChange={event => this.setState({ email: event.target.value })}
                         value={this.state.email}
                     />
-                    <input type="submit" value="Save" />
+                   <input type="submit" value="Save" />
                 </form>
             </div>
         );
