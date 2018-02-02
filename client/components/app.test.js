@@ -8,16 +8,16 @@ describe('App Component', () => {
     shallow(<App />);
   });
 
-  it('should contains a css class nav-wrappe', function() {
-    expect(shallow(<App />).exists(<div className="nav-wrapper"></div>)).toBe(true);
+  it('should contains Header', function() {
+    expect(shallow(<App />).find("Header").exists()).toBe(true);
   });
 
-  it("Should render nav", ()=>{
-    expect(shallow(<App />).exists(<nav></nav>)).toBe(true);  
+  it("Should contains Footer", ()=>{
+    expect(shallow(<App />).find("Footer").exists()).toBe(true);  
   });
 
-  it("Should render logo", ()=>{
-    expect(shallow(<App />).exists('a.brand-logo')).toBe(true); 
+  it("Should contains div element with main css class", ()=>{
+    expect(shallow(<App />).find('div.main').exists()).toBe(true); 
   });
   
 })

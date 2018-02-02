@@ -1,7 +1,7 @@
 import React from 'react';
 import { shallow, mount, render } from 'enzyme';
 
-import Footer from './footer';
+import Footer from './Footer';
 
 describe('Footer Component', () => {  
   it('should render html footer', function() {
@@ -14,8 +14,8 @@ describe('Footer Component', () => {
     expect(footer.find('a').text()).toMatch(new Date().getFullYear().toString());
   });
 
-  it('should contains a css class nav-wrappe', function() {
-    expect(shallow(<Footer />).exists( <footer className="footer"></footer>)).toBe(true);
+  it('should contains a footer element', function() {
+    expect(shallow(<Footer />).find("footer.footer").exists()).toBe(true);
   });
   
 })

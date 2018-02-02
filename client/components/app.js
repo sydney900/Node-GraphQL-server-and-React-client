@@ -6,8 +6,8 @@ import { HttpLink } from 'apollo-link-http';
 import { InMemoryCache } from 'apollo-cache-inmemory';
 import fetch from 'unfetch';
 
-import Header from './header';
-import Footer from './footer';
+import Header from './Header';
+import Footer from './Footer';
 import ClientList from './ClientList';
 import ClientCreate from './ClientCreate';
 import ClientDetail from './ClientDetail';
