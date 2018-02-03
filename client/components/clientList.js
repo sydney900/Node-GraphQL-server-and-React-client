@@ -3,7 +3,7 @@ import gql from 'graphql-tag';
 import { graphql } from 'react-apollo';
 import { Link } from 'react-router-dom';
 
-import query from '../queries/fetchClients';
+import gqlQueryClients from '../queries/fetchClients';
 
 class ClientList extends Component {
     onClientDelete(id) {
@@ -57,5 +57,5 @@ mutation DeleteClient($id: ID) {
 `;
 
 export default graphql(mutation)(
-    graphql(query)(ClientList)
+    graphql(gqlQueryClients)(ClientList)
 );

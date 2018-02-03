@@ -1,33 +1,49 @@
 import React from 'react';
+import { BrowserRouter, Link } from 'react-router-dom';
+
 import { shallow, mount, render } from 'enzyme';
-import { MockedProvider } from 'react-apollo/test-utils';
+import { ApolloProvider } from 'react-apollo';
+//import { MockedProvider } from 'react-apollo/test-utils';
+import{graphqlMock, clientsDta} from '../helps/graphqlMock';
 
 import ClientCreate from './ClientCreate';
 
-const clientList = {
-  clients: [
-    {clientName: 'A',clientPassword: 'AAAAA',email: 'A@qq.com', __typename: 'Client' },
-    {clientName: 'B',clientPassword: 'BBBBB',email: 'B@qq.com', __typename: 'Client' }
-  ]
-};
+const wrapper = mount(
+  <ApolloProvider  client={graphqlMock.client}>
+     <BrowserRouter>
+       <ClientCreate />
+     </BrowserRouter>
+  </ApolloProvider>
+);
 
 describe('ClientCreate Component', () => {
+  beforeEach(() => graphqlMock.reset());
+
   it('should render without throwing an error', () => {
     shallow(<ClientCreate />);
   });
 
   it('should contains one form', function () {
-    const wrapper = shallow(<ClientCreate />);
-    console.log(wrapper);
-    expect(wrapper.find("div").exists()).toBe(true);
+    expect(wrapper.find("form").exists()).toBe(true);
   });
 
-  it('should contains three input in the form',  () => {
-    expect(shallow(<ClientCreate />).find("input").length).toBe(3);
+  it('should contains correctnumber of input in the form',  () => {
+    expect(wrapper.find("input").length).toBe(4);
   });
 
-  // it("Should contains a input of email type", () => {
-  //   expect(shallow(<ClientCreate />).find({ type: "email" }).exists()).toBe(true);
-  // });
+  it("Click submit button should work", () => {
+    graphqlMock.expect(wrapper.mutaion).reply({
+      "addClient": {
+        "id": "5a751ee2d258ff3b30e02781",
+        "clientName": "DD",
+        "clientPassword": "DD",
+        "email": "dd@qq.com"
+      }
+      });
+
+    const button = wrapper.find("input[value='Save']");
+    button.simulate("click");
+    expect(clientsDta.length).toBe(2);
+  });
 
 })

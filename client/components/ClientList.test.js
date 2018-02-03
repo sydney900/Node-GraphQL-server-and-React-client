@@ -1,50 +1,51 @@
-import React from 'react';
+import React, { Component } from "react";
+
+import gql from 'graphql-tag';
+import { graphql } from 'react-apollo';
+
+import { ApolloProvider } from 'react-apollo';
+//import { MockedProvider } from 'react-apollo/test-utils';
+
 import { BrowserRouter, Link } from 'react-router-dom';
 
 import { shallow, mount, render } from 'enzyme';
-import { MockedProvider } from 'react-apollo/test-utils';
-
-import { addTypenameToDocument } from 'apollo-client';
 
 import ClientList from './ClientList';
-import query from '../queries/fetchClients';
+import gqlQueryClients from '../queries/fetchClients';
 
-const gqlQuery = addTypenameToDocument(query);
+import { graphqlMock, clientsDta } from '../helps/graphqlMock';
 
-const clientsResult = {
-  loading: false,
-  clients: [
-    {clientName: 'A',clientPassword: 'AAAAA',email: 'A@qq.com', __typename: 'Client' },
-    {clientName: 'B',clientPassword: 'BBBBB',email: 'B@qq.com', __typename: 'Client' }
-  ]
-};
+graphqlMock.expect(gqlQueryClients).reply({
+  clients: clientsDta
+});
+
+
+const wrapper = mount(
+  <ApolloProvider client={graphqlMock.client}>
+    <BrowserRouter>
+      <ClientList />
+    </BrowserRouter>
+  </ApolloProvider>
+);
 
 describe('ClientList Component', () => {
+
+  beforeAll(() => {
+  });
+
+  beforeEach(() => {
+    graphqlMock.reset()
+  });
+
   it('should render without throwing an error', () => {
     shallow(<ClientList />);
   });
 
   it('should render client data correctly', function () {
-    const wrapper = mount(
-      <BrowserRouter>
-      <MockedProvider mocks={[{
-        request: {
-          query: gqlQuery,
-          variables: { },
-        },
-        result: {
-          data: clientsResult,
-        },
-      }]}
-      >
-       <ClientList />
-      </MockedProvider>
-      </BrowserRouter>
-  );
 
-  console.log(wrapper.find('ClientList').props());
-  console.log(wrapper.find('ClientList').props.data);
-    expect(wrapper.find('ClientList').prop('data').clients.length).toBe(2);
-    expect(toJSON(wrapper)).toMatchSnapshot();
+    expect(wrapper.find("ClientList").props().data.clients.length).toBe(clientsDta.length);
+    expect(wrapper.find(".collection-item").length).toBe(clientsDta.length);
+    expect(wrapper.find("i.material-icons").length).toBe(clientsDta.length + 1);
+    // expect(toJSON(wrapper)).toMatchSnapshot();
   });
 })

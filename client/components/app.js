@@ -25,7 +25,7 @@ class App extends Component {
         return (
             <BrowserRouter>
                 <div className="wrapper">
-                    <Header></Header>
+                    <Header logoName='GraphQL Demo'></Header>
                     <div className="main">
                         <ApolloProvider client={client}>
                             <Switch>

@@ -25,6 +25,18 @@ npm run dev
 ```
 npm run debug
 ```
+### Test
+```
+npm run test
+```
+### Continue testing
+```
+npm run testwatch
+```
+### Test Coverage
+```
+npm run coverage
+```
 ### Broswer
 [http://localhost:63001](http://localhost:63001/)
 ### Broswer GraphiQL

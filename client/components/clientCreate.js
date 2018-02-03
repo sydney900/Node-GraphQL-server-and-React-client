@@ -3,7 +3,7 @@ import { graphql } from 'react-apollo';
 import gql from 'graphql-tag';
 import { Link, HashRouter } from 'react-router-dom';
 
-import query from '../queries/fetchClients';
+import gqlQueryClients from '../queries/fetchClients';
 
 class ClientCreate extends Component {
     constructor(props) {
@@ -25,8 +25,11 @@ class ClientCreate extends Component {
                 clientPassword: this.state.clientPassword,
                 email: this.state.email
             },
-            refetchQueries: [{ query: query, variables: null }]
-        }).then(() => this.props.history.push("/"));
+            refetchQueries: [{ query: gqlQueryClients, variables: null }]
+        }).then(() => {
+            console.log(this.props.data);
+            this.props.history.push("/")
+        });
     }
 
     render() {

@@ -10,7 +10,9 @@
   "scripts": {
     "dev": "nodemon index.js --ignore client",
     "debug": "nodemon index.js --ignore client",
-    "test": "jest --watch",
+    "test": "jest",
+    "testwatch": "jest --watch",
+    "coverage": "jest --coverage",
     "build": "webpack"
   },
   "author": "",
@@ -49,6 +51,7 @@
     "babel-preset-react": "^6.24.1",
     "enzyme": "^3.3.0",
     "enzyme-adapter-react-16": "^1.1.1",
+    "graphql-mock": "0.0.3",
     "jest": "^22.1.4",
     "jest-css-modules": "^1.1.0",
     "react-test-renderer": "^16.2.0",
