@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
 import gql from 'graphql-tag';
 import { graphql } from 'react-apollo';
+import gqlAddProductToClient from '../queries/addProductToClient';
 
 class ProductCreate extends Component {
     constructor(props) {
         super(props);
 
-        this.state = { name: '', clientId: this.props.clientId };
+        this.state = { name: (!this.props.pname) ? '' : this.props.pname, clientId: this.props.clientId };
     }
 
     onSubmit(event) {
@@ -24,7 +25,7 @@ class ProductCreate extends Component {
         return (
             <form onSubmit={this.onSubmit.bind(this)}>
                 <label>Add a Product</label>
-                <input
+                <input id="name" minLength="5"
                     value={this.state.name}
                     onChange={event => this.setState({ name: event.target.value })}
                 />
@@ -34,16 +35,4 @@ class ProductCreate extends Component {
     }
 }
 
-const mutation = gql`
-  mutation AddProductToClient($name: String!, $clientId: ID) {
-    addProductToClient(name: $name, clientId: $clientId) {
-      id
-      products {
-        id
-        name
-      }
-    }
-  }
-`;
-
-export default graphql(mutation)(ProductCreate);
+export default graphql(gqlAddProductToClient)(ProductCreate);

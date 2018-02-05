@@ -1,10 +1,7 @@
 import React, { Component } from "react";
-
 import gql from 'graphql-tag';
 import { graphql } from 'react-apollo';
-
 import { ApolloProvider } from 'react-apollo';
-//import { MockedProvider } from 'react-apollo/test-utils';
 
 import { BrowserRouter, Link } from 'react-router-dom';
 
@@ -13,12 +10,11 @@ import { shallow, mount, render } from 'enzyme';
 import ClientList from './ClientList';
 import gqlQueryClients from '../queries/fetchClients';
 
-import { graphqlMock, clientsDta } from '../helps/graphqlMock';
+import { graphqlMock, clientsData } from '../helps/graphqlMock';
 
 graphqlMock.expect(gqlQueryClients).reply({
-  clients: clientsDta
+  clients: clientsData
 });
-
 
 const wrapper = mount(
   <ApolloProvider client={graphqlMock.client}>
@@ -42,10 +38,9 @@ describe('ClientList Component', () => {
   });
 
   it('should render client data correctly', function () {
-
-    expect(wrapper.find("ClientList").props().data.clients.length).toBe(clientsDta.length);
-    expect(wrapper.find(".collection-item").length).toBe(clientsDta.length);
-    expect(wrapper.find("i.material-icons").length).toBe(clientsDta.length + 1);
+    expect(wrapper.find("ClientList").props().data.clients.length).toBe(clientsData.length);
+    expect(wrapper.find(".collection-item").length).toBe(clientsData.length);
+    expect(wrapper.find("i.material-icons").length).toBe(clientsData.length + 1);
     // expect(toJSON(wrapper)).toMatchSnapshot();
   });
 })

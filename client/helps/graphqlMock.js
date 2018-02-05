@@ -14,10 +14,11 @@ const schema = `
 
   type Mutation {
     addClient(clientName: String, clientPassword: String, email:String): Client
+    addProductToClient(name: String, clientId: ID): Client
   }
 `;
 
-export const clientsDta = [
+export const clientsData = [
     { id: '1', clientName: 'A', clientPassword: 'AAAAA', email: 'A@qq.com' },
     { id: '2', clientName: 'B', clientPassword: 'BBBBB', email: 'B@qq.com' }
 ]
