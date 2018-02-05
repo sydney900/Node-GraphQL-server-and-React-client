@@ -6,6 +6,9 @@ import ProductCreate from './ProductCreate';
 import ProductList from './ProductList';
 
 class ClientDetail extends Component {
+    constructor(props) {
+        super(props);
+    }
     render() {
 
         if (this.props.data.loading) {
