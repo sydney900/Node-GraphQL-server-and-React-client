@@ -3,10 +3,10 @@ import { BrowserRouter, Link } from 'react-router-dom';
 
 import { shallow, mount, render } from 'enzyme';
 import { ApolloProvider } from 'react-apollo';
-//import { MockedProvider } from 'react-apollo/test-utils';
-import{graphqlMock, clientsDta} from '../helps/graphqlMock';
+import{graphqlMock, clientsData} from '../helps/graphqlMock';
 
 import ClientCreate from './ClientCreate';
+import gqlAddClients from '../queries/addClient';
 
 const wrapper = mount(
   <ApolloProvider  client={graphqlMock.client}>
@@ -24,15 +24,28 @@ describe('ClientCreate Component', () => {
   });
 
   it('should contains one form', function () {
-    expect(wrapper.find("form").exists()).toBe(true);
+    expect(wrapper.find("form").length).toBe(1);
+    expect(wrapper.exists(<from />)).toBe(true);
   });
 
   it('should contains correctnumber of input in the form',  () => {
     expect(wrapper.find("input").length).toBe(4);
   });
 
-  it("Click submit button should work", () => {
-    graphqlMock.expect(wrapper.mutaion).reply({
+  it('should render a client name input', () => {
+    expect(wrapper.find('[name="clientName"]').length).toEqual(1)
+   })
+
+   it('should render a email input', () => {
+    expect(wrapper.find('[name="email"]').length).toEqual(1)
+   })
+
+  it('should render a password input', () => {
+    expect(wrapper.find('[name="password"]').length).toEqual(1)
+   })
+
+  it("Click submit button should work", () => {       
+    graphqlMock.expect(gqlAddClients).reply({
       "addClient": {
         "id": "5a751ee2d258ff3b30e02781",
         "clientName": "DD",
@@ -43,7 +56,7 @@ describe('ClientCreate Component', () => {
 
     const button = wrapper.find("input[value='Save']");
     button.simulate("click");
-    expect(clientsDta.length).toBe(2);
+    expect(clientsData.length).toBe(2);
   });
 
 })

@@ -15,13 +15,13 @@ if (!config || !config.mongodb || !config.mongodb.url) {
 mongoose.Promise = global.Promise;
 mongoose.connect(config.mongodb.url, { useMongoClient: true });
 mongoose.connection
-    .once('openUri', () => console.log('Connected to MongoLab instance.'))
-    .on('error', error => {
-      console.log('Error connecting to MongoLab:', error);
-      setTimeout(() => {
-        mongoose.connect(config.mongodb.url, { useMongoClient: true });
-      }, 1000);
-    });
+  .once('openUri', () => console.log('Connected to MongoLab instance.'))
+  .on('error', error => {
+    console.log('Error connecting to MongoLab:', error);
+    setTimeout(() => {
+      mongoose.connect(config.mongodb.url, { useMongoClient: true });
+    }, 1000);
+  });
 
 app.use(bodyParser.json());
 app.use('/graphql', expressGraphQL({

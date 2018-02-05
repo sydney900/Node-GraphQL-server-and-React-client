@@ -3,6 +3,7 @@ import { graphql } from 'react-apollo';
 import gql from 'graphql-tag';
 import { Link, HashRouter } from 'react-router-dom';
 
+import gqlAddClients from '../queries/addClient';
 import gqlQueryClients from '../queries/fetchClients';
 
 class ClientCreate extends Component {
@@ -32,6 +33,12 @@ class ClientCreate extends Component {
         });
     }
 
+    inputChanged(event) {
+        this.setState({
+         [event.target.name]: event.target.value
+        })
+       }
+
     render() {
         return (
             <div>
@@ -39,18 +46,18 @@ class ClientCreate extends Component {
                 <h3>Create a New Client</h3>
                 <form onSubmit={this.onSubmit.bind(this)} >
                     <label>Client Name</label>
-                    <input minLength="5"
-                        onChange={event => this.setState({ clientName: event.target.value })}
+                    <input minLength="5" name="clientName"
+                        onChange={this.inputChanged}
                         value={this.state.clientName}
                     />
                     <label>Client Password:</label>
-                    <input type="password"
-                        onChange={event => this.setState({ clientPassword: event.target.value })}
+                    <input type="password" name="password"
+                        onChange={this.inputChanged}
                         value={this.state.clientPassword}
                     />
                     <label>Client Email:</label>
-                    <input type="email"
-                        onChange={event => this.setState({ email: event.target.value })}
+                    <input type="email" name = "email"
+                        onChange={this.inputChanged}
                         value={this.state.email}
                     />
                    <input type="submit" value="Save" />
@@ -60,14 +67,4 @@ class ClientCreate extends Component {
     }
 }
 
-const mutation = gql`
-mutation AddClient($clientName:String!, $clientPassword:String!, $email:String!) {
-  addClient(clientName: $clientName, clientPassword:$clientPassword, email: $email) {
-      id
-      clientName
-      clientPassword
-      email
-  }
-}`;
-
-export default graphql(mutation)(ClientCreate);
+export default graphql(gqlAddClients)(ClientCreate);
