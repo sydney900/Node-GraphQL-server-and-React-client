@@ -2,14 +2,16 @@ import React, { Component } from 'react';
 import { graphql } from 'react-apollo';
 import gql from 'graphql-tag';
 
+import gqlDeleteProductFromClient from '../queries/deleteProductFromClient';
+
 class ProductList extends Component {
-    constructor(props) {
-        super(props);
+  constructor(props) {
+    super(props);
 
-        this.state = { clientId: this.props.clientId };
-    }
+    this.state = { clientId: this.props.clientId };
+  }
 
-    onDeleteFromClient(id, clientId) {
+  onDeleteFromClient(id, clientId) {
     this.props.mutate({
         variables: {
             id,
@@ -42,15 +44,4 @@ class ProductList extends Component {
   }
 }
 
-const mutation = gql`
-  mutation DeleteProductFromClient($id: ID!, $clientId: ID!) {
-    deleteProductFromClient(id: $id, clientId: $clientId) {
-      id
-      products {
-        name
-      }
-    }
-  }
-`;
-
-export default graphql(mutation)(ProductList);
+export default graphql(gqlDeleteProductFromClient)(ProductList);
