@@ -19,7 +19,7 @@ class ClientCreate extends Component {
     onSubmit(event) {
         event.preventDefault();
 
-        // console.log(this.props);
+        console.log(this.state.email);
         this.props.mutate({
             variables: {
                 clientName: this.state.clientName,
@@ -47,17 +47,17 @@ class ClientCreate extends Component {
                 <form onSubmit={this.onSubmit.bind(this)} >
                     <label>Client Name</label>
                     <input minLength="5" name="clientName"
-                        onChange={this.inputChanged}
+                        onChange={this.inputChanged.bind(this)}
                         value={this.state.clientName}
                     />
                     <label>Client Password:</label>
                     <input type="password" name="password"
-                        onChange={this.inputChanged}
+                        onChange={this.inputChanged.bind(this)}
                         value={this.state.clientPassword}
                     />
                     <label>Client Email:</label>
                     <input type="email" name = "email"
-                        onChange={this.inputChanged}
+                        onChange={this.inputChanged.bind(this)}
                         value={this.state.email}
                     />
                    <input type="submit" value="Save" />

@@ -12,11 +12,14 @@ class ProductList extends Component {
   }
 
   onDeleteFromClient(id, clientId) {
+    console.log("click");
     this.props.mutate({
         variables: {
             id,
             clientId
         }
+    }).then(() => {
+      console.log(this.props.data);
     });
   }
 

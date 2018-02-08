@@ -13,6 +13,7 @@ const typeDefs = `
     clientName: String!
     clientPassword: String!
     email: String!
+    products: Product
   }
 
   type Product {
@@ -59,11 +60,15 @@ const resolvers = {
       const client = { clientName, clientPassword, email };
       clientsData.push(client);
 
+      console.log("addClient", client);
+
       return client;
     },
     deleteProductFromClient: (id, clientId) => {
+      console.log("deleteProductFromClient");
       const client = clientsData.find(c => c.id === clientId);
       client.products.splice(client.products.findIndex(p => p.id === id), 1);
+      console.log(client);
       return client;
     }
   },
