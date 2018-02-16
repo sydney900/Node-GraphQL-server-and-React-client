@@ -19,7 +19,9 @@ class ClientCreate extends Component {
     onSubmit(event) {
         event.preventDefault();
 
-        console.log(this.state.email);
+        console.log('onSubmit', this);
+        // console.log(this.state);
+
         this.props.mutate({
             variables: {
                 clientName: this.state.clientName,
@@ -28,12 +30,13 @@ class ClientCreate extends Component {
             },
             refetchQueries: [{ query: gqlQueryClients, variables: null }]
         }).then(() => {
-            console.log(this.props.data);
+            //console.log(this.props.mutate);
             this.props.history.push("/")
         });
     }
 
     inputChanged(event) {
+        console.log(event.target.value);
         this.setState({
          [event.target.name]: event.target.value
         })
@@ -51,7 +54,7 @@ class ClientCreate extends Component {
                         value={this.state.clientName}
                     />
                     <label>Client Password:</label>
-                    <input type="password" name="password"
+                    <input type="password" name="clientPassword"
                         onChange={this.inputChanged.bind(this)}
                         value={this.state.clientPassword}
                     />

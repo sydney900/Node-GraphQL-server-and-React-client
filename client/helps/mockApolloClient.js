@@ -52,7 +52,10 @@ export const clientsData = [
 
 const resolvers = {
   Query: {
-    clients: () => clientsData,
+    clients: () => {
+      console.log("call clients");
+      return clientsData
+    },
     client: (id) => clientsData.find(c => c.id === id),
   },
   Mutation: {
