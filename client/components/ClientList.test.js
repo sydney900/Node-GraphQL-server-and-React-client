@@ -41,6 +41,5 @@ describe('ClientList Component', () => {
     expect(wrapper.find("ClientList").props().data.clients.length).toBe(clientsData.length);
     expect(wrapper.find(".collection-item").length).toBe(clientsData.length);
     expect(wrapper.find("i.material-icons").length).toBe(clientsData.length + 1);
-    // expect(toJSON(wrapper)).toMatchSnapshot();
   });
 })

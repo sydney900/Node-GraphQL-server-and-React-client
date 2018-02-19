@@ -19,9 +19,6 @@ class ClientCreate extends Component {
     onSubmit(event) {
         event.preventDefault();
 
-        console.log('onSubmit', this);
-        // console.log(this.state);
-
         this.props.mutate({
             variables: {
                 clientName: this.state.clientName,
@@ -36,7 +33,7 @@ class ClientCreate extends Component {
     }
 
     inputChanged(event) {
-        console.log(event.target.value);
+        //console.log(event.target.value);
         this.setState({
          [event.target.name]: event.target.value
         })
