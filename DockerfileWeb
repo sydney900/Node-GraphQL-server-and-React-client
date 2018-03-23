@@ -1,0 +1,16 @@
+FROM node:9-alpine as builder
+ENV NODE_ENV production
+WORKDIR /usr/src/app
+COPY ["package.json", "package-lock.json*", "npm-shrinkwrap.json*", "./"]
+RUN apk update && apk upgrade && apk add --no-cache bash git openssh
+RUN npm install
+COPY [".babelrc", "default.conf", "setupTests.js", "webpack.config.js", "./"]
+COPY ./client client/
+COPY ./client-config.docker.js client/components/client-config.js
+RUN npm run build
+
+FROM nginx:1.13.9-alpine
+COPY --from=builder /usr/src/app/default.conf /etc/nginx/conf.d/
+RUN rm -rf /usr/share/nginx/html/*
+COPY --from=builder /usr/src/app/dist /usr/share/nginx/html
+CMD ["nginx", "-g", "daemon off;"]

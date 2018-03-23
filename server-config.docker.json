@@ -1,0 +1,8 @@
+{
+    "mongodb": {
+        "url": "mongodb://sydney:900@mongodb:27017/sydney900"
+    },
+    "server": {
+        "port": 63002
+    }
+}

@@ -1,0 +1,36 @@
+version: '3'
+
+services:
+  website:
+    image: website
+    build: 
+      context: .
+      dockerfile: DockerfileWeb
+    environment:
+      - NODE_ENV=production
+    ports:
+      - 63001:80
+
+  api:
+    image: nodegraphqlserver
+    build: 
+      context: .
+      dockerfile: DockerfileApi
+    environment:
+      NODE_ENV: production
+    ports:
+      - 63002:63002
+    depends_on:
+      - mongodb      
+
+  mongodb:
+    image: mongo:3.6.3-jessie
+    container_name: "mymongodb"
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=sydney
+      - MONGO_INITDB_ROOT_PASSWORD=900
+      - MONGO_INITDB_DATABASE=sydney900
+    volumes:
+      - ./../data/db:/data/db
+    ports:
+      - 27017:27017

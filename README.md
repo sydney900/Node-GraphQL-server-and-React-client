@@ -1,6 +1,14 @@
 # Node GraphQL server and React client
 Node GraphQL server using MongoDB for persistent storage and React client
 
+## Build and run in dockers
+Go to the folder, and run command
+```
+docker-compose up -d
+```
+and then open browser at **http://192.168.99.100:62001**. 
+
+## Local desktop
 ### Setup
 1. #### run following command
 ```

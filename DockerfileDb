@@ -1,0 +1,3 @@
+FROM mongo:3.6.3-jessie
+COPY ./create_user.js /tmp/
+RUN mongod --fork --logpath /var/log/mongodb.log && sleep 3 && mongo sydney900 /tmp/create_user.js

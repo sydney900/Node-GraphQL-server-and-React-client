@@ -11,10 +11,16 @@ import Footer from './Footer';
 import ClientList from './ClientList';
 import ClientCreate from './ClientCreate';
 import ClientDetail from './ClientDetail';
+import config from './client-config';
+
+var graphqlurl = '/graphql';
+if (config && !config.graphqlurl) {
+    graphqlurl = config.graphqlurl;
+}
 
 const client = new ApolloClient({
     dataIdFromObject: o => o.id,
-    link: new HttpLink({ uri: '/graphql', fetch: fetch }),
+    link: new HttpLink({ uri: graphqlurl, fetch: fetch }),
     cache: new InMemoryCache()
 });
 
