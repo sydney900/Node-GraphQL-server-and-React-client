@@ -11,3 +11,4 @@ db.createUser(
         wtimeout: 5000
     }
 );
+db.createCollection(process.env.MONGODB_DATABASE);

@@ -24,13 +24,23 @@ services:
       - mongodb      
 
   mongodb:
-    image: mongo:3.6.3-jessie
-    container_name: "mymongodb"
-    environment:
-      - MONGO_INITDB_ROOT_USERNAME=sydney
-      - MONGO_INITDB_ROOT_PASSWORD=900
-      - MONGO_INITDB_DATABASE=sydney900
+    image: mymongodb
     volumes:
-      - ./../data/db:/data/db
+      - /C/Users/Bing/Documents/Kitematic/Data:/data/db
+    build: 
+      context: .
+      dockerfile: DockerfileDb
+    # environment:
+    #   - MONGODB_USER=sydney
+    #   - MONGODB_PASS=900
+    #   - MONGODB_DATABASE=sydney900 
+    #   - MONGODB_USERROLE=readWrite   
+    # image: mongo:3.6.3-jessie
+    # container_name: "mymongodb"
+    # environment:
+    #   - MONGO_INITDB_ROOT_USERNAME=sydney
+    #   - MONGO_INITDB_ROOT_PASSWORD=900
+    #   - MONGO_INITDB_DATABASE=sydney900
     ports:
       - 27017:27017
+    # command: mongod --fork --logpath /var/log/mongodb.log && sleep 5 && mongo localhost --eval  "db.createUser({user: 'sydney',pwd: '900', roles: [{ role: 'readWrite', db: 'sydney900' }]});db.createCollection('sydney900');"

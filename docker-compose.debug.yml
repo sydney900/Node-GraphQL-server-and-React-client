@@ -1,12 +1,14 @@
-version: '2.1'
+version: '3'
 
 services:
-  node-graphql-server-and-react-client:
-    image: node-graphql-server-and-react-client
-    build: .
+  api:
+    image: nodegraphqlserver
+    build: 
+      context: .
+      dockerfile: DockerfileApi
     environment:
-      NODE_ENV: development
+      NODE_ENV: production
     ports:
-      - 63001:63001
+      - 63002:63002
       - 9229:9229
     command: node --inspect=0.0.0.0:9229 index.js

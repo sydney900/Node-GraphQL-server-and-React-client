@@ -6,15 +6,15 @@ import { HttpLink } from 'apollo-link-http';
 import { InMemoryCache } from 'apollo-cache-inmemory';
 import fetch from 'unfetch';
 
-import Header from './Header';
-import Footer from './Footer';
-import ClientList from './ClientList';
-import ClientCreate from './ClientCreate';
-import ClientDetail from './ClientDetail';
+import Header from './header';
+import Footer from './footer';
+import ClientList from './clientList';
+import ClientCreate from './clientCreate';
+import ClientDetail from './clientDetail';
 import config from './client-config';
 
 var graphqlurl = '/graphql';
-if (config && !config.graphqlurl) {
+if (config && config.graphqlurl) {
     graphqlurl = config.graphqlurl;
 }
 

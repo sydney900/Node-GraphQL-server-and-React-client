@@ -3,7 +3,8 @@ ENV NODE_ENV production
 WORKDIR /usr/src/app
 COPY ["package.json", "package-lock.json*", "npm-shrinkwrap.json*", "./"]
 RUN npm install --production --silent && mv node_modules ../
-COPY ["webpack.config.js", "index.js", "./"]
+# COPY ["webpack.config.js", "index.js", "./"]
+COPY ["index.js", "./"]
 COPY ./server server/
 COPY ./server-config.docker.json server/server-config.json
 EXPOSE 63002

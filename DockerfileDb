@@ -1,3 +1,5 @@
 FROM mongo:3.6.3-jessie
-COPY ./create_user.js /tmp/
-RUN mongod --fork --logpath /var/log/mongodb.log && sleep 3 && mongo sydney900 /tmp/create_user.js
+RUN mongod --fork --logpath /var/log/mongodb.log \
+    && sleep 5 \
+    && mongo localhost --eval  "db.createUser({user: 'sydney',pwd: '900', roles: [{ role: 'readWrite', db: 'sydney900' }]});db.createCollection('sydney900');"
+EXPOSE 27017
