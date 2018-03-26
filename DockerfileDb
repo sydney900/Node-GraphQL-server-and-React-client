@@ -1,5 +1,5 @@
 FROM mongo:3.6.3-jessie
 RUN mongod --fork --logpath /var/log/mongodb.log \
     && sleep 5 \
-    && mongo localhost --eval  "db.createUser({user: 'sydney',pwd: '900', roles: [{ role: 'readWrite', db: 'sydney900' }]});db.createCollection('sydney900');"
+    && mongo localhost --eval  "db.createCollection('sydney900');db.createUser({user: 'sydney',pwd: '900', roles: [{ role: 'readWrite', db: 'sydney900' }]});"
 EXPOSE 27017

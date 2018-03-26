@@ -7,7 +7,8 @@ services:
       context: .
       dockerfile: DockerfileWeb
     environment:
-      - NODE_ENV=production
+      NODE_EN: =production
+      GRAPHQL_URL: http://192.168.99.100:63002/graphql
     ports:
       - 63001:80
 
@@ -18,29 +19,21 @@ services:
       dockerfile: DockerfileApi
     environment:
       NODE_ENV: production
+      MONGODB_URL: mongodb://sydney:900@mongodb:27017/sydney900
     ports:
-      - 63002:63002
+      - 63002:80
     depends_on:
       - mongodb      
 
   mongodb:
     image: mymongodb
-    volumes:
-      - /C/Users/Bing/Documents/Kitematic/Data:/data/db
     build: 
       context: .
       dockerfile: DockerfileDb
-    # environment:
-    #   - MONGODB_USER=sydney
-    #   - MONGODB_PASS=900
-    #   - MONGODB_DATABASE=sydney900 
-    #   - MONGODB_USERROLE=readWrite   
-    # image: mongo:3.6.3-jessie
-    # container_name: "mymongodb"
-    # environment:
-    #   - MONGO_INITDB_ROOT_USERNAME=sydney
-    #   - MONGO_INITDB_ROOT_PASSWORD=900
-    #   - MONGO_INITDB_DATABASE=sydney900
+    environment:
+          - MONGO_DATA_DIR=/data/db
+    volumes:
+      - /c/Users/Bing/Documents/Kitematic/Data:/data/configdb 
+      - /c/Users/Bing/Documents/Kitematic/Data:/data/db 
     ports:
       - 27017:27017
-    # command: mongod --fork --logpath /var/log/mongodb.log && sleep 5 && mongo localhost --eval  "db.createUser({user: 'sydney',pwd: '900', roles: [{ role: 'readWrite', db: 'sydney900' }]});db.createCollection('sydney900');"
