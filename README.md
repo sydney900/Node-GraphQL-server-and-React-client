@@ -6,7 +6,12 @@ Go to the folder, and run command
 ```
 docker-compose up -d
 ```
-and then open browser at **http://192.168.99.100:62001**. 
+and then after all three docker containers started open browser at **http://192.168.99.100:63001**. Ip address 192.168.99.100 is default docker machine ip address. RUn command 
+```
+docker-machine ip
+```
+to check out your host ip address if you areusing docker toolbox.
+
 
 ## Local desktop
 ### Setup

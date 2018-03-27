@@ -33,7 +33,10 @@ services:
     environment:
           - MONGO_DATA_DIR=/data/db
     volumes:
-      - /c/Users/Bing/Documents/Kitematic/Data:/data/configdb 
-      - /c/Users/Bing/Documents/Kitematic/Data:/data/db 
+      - mongodata:/data/configdb 
+      - mongodata:/data/db 
     ports:
       - 27017:27017
+
+volumes:
+  mongodata:      
